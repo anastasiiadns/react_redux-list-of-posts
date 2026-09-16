@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { getUsers } from '../api/users';
+import React, { useEffect } from 'react';
 import { User } from '../types/User';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { fetchUsers } from '../store/usersSlice';
 
 export const UserContext = React.createContext<User[]>([]);
 
@@ -9,11 +10,12 @@ type Props = {
 };
 
 export const UsersProvider: React.FC<Props> = ({ children }) => {
-  const [users, setUsers] = useState<User[]>([]);
+  const users = useAppSelector(state => state.users.items);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getUsers().then(setUsers);
-  }, []);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return <UserContext.Provider value={users}>{children}</UserContext.Provider>;
 };
