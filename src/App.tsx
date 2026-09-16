@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from './app/hooks';
 import { clearPost, fetchPosts } from './store/postsSlice';
 import { setAuthor } from './store/authorSlice';
 import { setSelectedPost } from './store/selectedPostSlice';
+import { fetchUsers } from './store/usersSlice';
 
 export const App: React.FC = () => {
   const posts = useAppSelector(state => state.posts.items);
@@ -27,6 +28,8 @@ export const App: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(fetchUsers());
+
     if (author) {
       dispatch(fetchPosts(author.id));
     } else {

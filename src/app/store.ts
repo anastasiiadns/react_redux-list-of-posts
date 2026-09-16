@@ -9,7 +9,6 @@ import { usersSlice } from '../store/usersSlice';
 import { authorSlice } from '../store/authorSlice';
 import { selectedPostSlice } from '../store/selectedPostSlice';
 import { commentsSlice } from '../store/commentsSlice';
-// eslint-disable-next-line import/no-cycle
 
 const rootReducer = combineSlices(
   postsSlice,
